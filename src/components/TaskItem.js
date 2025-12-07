@@ -15,10 +15,15 @@ import FlagIcon from '@mui/icons-material/Flag';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import { format } from 'date-fns';
 import TaskForm from './TaskForm';
+import { fetchTasks, deleteTask } from '../features/tasks/tasksSlice';
+import { useDispatch } from 'react-redux';
+
 
 const TaskItem = ({ task, onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [editOpen, setEditOpen] = useState(false);
+  const dispatch = useDispatch();
+  
   
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'task',
@@ -44,7 +49,11 @@ const TaskItem = ({ task, onDelete }) => {
 
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this task?')) {
+      console.log(task, "task")
+          dispatch(deleteTask(task._id));
+      
       onDelete(task._id);
+      // deleteTask(task._id);
     }
     handleMenuClose();
   };

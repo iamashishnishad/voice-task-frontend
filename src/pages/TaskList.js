@@ -24,6 +24,7 @@ import { format } from 'date-fns';
 import { fetchTasks, deleteTask } from '../features/tasks/tasksSlice';
 import TaskForm from '../components/TaskForm';
 
+
 const TaskList = () => {
   const dispatch = useDispatch();
   const { tasks, loading, error } = useSelector((state) => state.tasks);
@@ -60,7 +61,7 @@ const TaskList = () => {
   };
 
   const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this task?')) {
+    if (window.confirm('Are you sure you want to delete this task?ndndn')) {
       dispatch(deleteTask(id));
     }
   };

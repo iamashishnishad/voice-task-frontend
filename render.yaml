@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: voice-task-tracker
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: oregon  # or: frankfurt, singapore, ohio
+    branch: main
+    autoDeploy: true
+    pullRequestPreviewsEnabled: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REACT_APP_API_URL
+        sync: false  # Set this in Render dashboard
+    healthCheckPath: /
+    buildFilter:
+      paths:
+        - package.json
+        - Dockerfile
+        - src/**
+        - public/**
+      ignoredPaths:
+        - node_modules/**
+        - build/**
+        - .git/**
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
